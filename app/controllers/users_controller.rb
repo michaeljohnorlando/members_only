@@ -36,14 +36,22 @@ class UsersController < ApplicationController
   def log_in_check
     # this will get the input from the forum
     user_to_check = User.new(params_user)
+
     # Check the databace for the user
     @user = User.find_by name: user_to_check.name
-    puts "\n user name is in the databace" if @user
-    #check the users passworrd
-    if @user.authenticate(user_to_check.password)
-      puts "\n Password Matches!"
+    if @user
+      puts "\n user name is in the databace"
+      #check the users passworrd
+      if @user.authenticate(user_to_check.password)
+        puts "\n Password Matches!"
+        redirect_to 'home'
+      else
+        puts "\n Password doesn't Match!"
+        render 'users/log_in'
+      end
     else
-      puts "\n Password dosent Match!"
+      puts "\n name doesn't Match!"
+      render 'users/log_in'
     end
   end
 
