@@ -1,6 +1,6 @@
 <p>loads_this_page: members_only\app\views\users\new.html.erb</p>
 
-<%= form_for(@user) do |f| %>
+<%= form_for @user, url: {action: "log_in_check"} do |f| %>
 
   <%= f.label :name %>
   <%= f.text_field :name%> <br>
